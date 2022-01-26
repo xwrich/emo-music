@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Map;
+
 /**
  * @Author: Dock
  * @CreateTime: 2022/1/26
@@ -37,6 +39,16 @@ public class ResBean {
      */
     public static ResBean success(String message,Object obj) {
         return new ResBean(200,message,obj);
+    }
+
+    /**
+     * 成功返回结果
+     * @param message
+     * @param map
+     * @return
+     */
+    public static ResBean success(String message, Map<String, String> map) {
+        return new ResBean(200,message,map);
     }
 
     /**
