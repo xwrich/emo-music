@@ -69,6 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/captcha")
+                .permitAll()
                 //所有请求都要求认证
                 .anyRequest()
                 .authenticated()

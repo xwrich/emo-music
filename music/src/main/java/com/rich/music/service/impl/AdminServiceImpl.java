@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,8 +56,9 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Override
     public ResBean login(String username, String password, String code, HttpServletRequest request) {
 
+        // 获取用户输入的验证码，判断是否未空并忽略大小写
         String captcha = (String) request.getSession().getAttribute("captcha");
-        if (StringUtils.hasLength(code) || !captcha.equalsIgnoreCase(code)) {
+        if (ObjectUtils.isEmpty(code) || !captcha.equalsIgnoreCase(code)) {
             return ResBean.error("验证码输入错误，请重新输入！");
         }
 
