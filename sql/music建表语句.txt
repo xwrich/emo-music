@@ -1,0 +1,113 @@
+CREATE TABLE `t_admin` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `role` varchar(45) NOT NULL,
+	`phone` char(11) NOT NULL,
+	`username` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
+	`enabled` tinyint(1) NULL DEFAULT 1,
+	`avatar` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+	UNIQUE INDEX `phone_UNIQUE`(`phone`) USING BTREE,
+  UNIQUE INDEX `name_UNIQUE`(`username`) USING BTREE
+);
+
+create table `t_role`(
+	`id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+	`name` VARCHAR(64) DEFAULT NULL COMMENT '名称',
+	`nameZh` VARCHAR(64) DEFAULT NULL COMMENT '角色名称',
+	PRIMARY KEY (`id`) USING BTREE
+);
+
+
+CREATE TABLE `t_admin_role`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `adminId` int(11) NULL DEFAULT NULL COMMENT '用户id',
+  `rid` int(11) NULL DEFAULT NULL COMMENT '权限id',
+  PRIMARY KEY (`id`),
+  INDEX `rid`(`rid`),
+  INDEX `adminId`(`adminId`),
+  FOREIGN KEY (`adminId`) REFERENCES `t_admin` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  FOREIGN KEY (`rid`) REFERENCES `t_role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+CREATE TABLE `t_singer` (
+	`id` int(11) NOT NULL AUTO_INCREMENT COMMENT '歌手id',
+	`name` VARCHAR(64) NOT NULL COMMENT '姓名',
+	`sex` TINYINT(4) NULL DEFAULT NULL COMMENT '性别',
+	`post` VARCHAR(255) NULL DEFAULT NULL COMMENT '海报',
+	`birth` datetime NULL DEFAULT NULL COMMENT '出生年月',
+	`location` VARCHAR(255) NULL DEFAULT NULL COMMENT '籍贯',
+	`intro` VARCHAR(255) NULL DEFAULT NULL COMMENT '介绍',
+	PRIMARY KEY(`id`) USING BTREE
+);
+
+
+CREATE TABLE `t_category` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '分类id',
+	`category_name` VARCHAR(64) NOT NULL COMMENT '分类名',
+	`create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+	`update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `t_song` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '歌曲id',
+	`song_name` VARCHAR(64) NOT NULL COMMENT '歌曲名',
+	`category_id` int(45) NULL DEFAULT NULL COMMENT '歌曲分类',
+	`song_words` VARCHAR(255) NULL DEFAULT NULL COMMENT '歌词',
+	`audio_url` VARCHAR(255) NULL DEFAULT NULL COMMENT '歌曲mp3/avi的url',
+	`video_url` VARCHAR(255) NULL DEFAULT NULL COMMENT '歌曲MV的url',
+	`post` VARCHAR(255) NULL DEFAULT NULL COMMENT '海报',
+	`intro` VARCHAR(255) NULL DEFAULT NULL COMMENT '简介',
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (`category_id`) REFERENCES `t_category` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+CREATE TABLE `t_album` (
+	`id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+	`album_name` VARCHAR(64) NOT NULL COMMENT '专辑名',
+	`song_id` INT(11) NULL DEFAULT NULL COMMENT '歌曲id',
+	PRIMARY KEY (`id`) USING BTREE,
+	FOREIGN KEY(`song_id`) REFERENCES `t_song` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
+);
+
+CREATE TABLE `t_user` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '普通用户id',
+	`username` VARCHAR(64) NOT NULL COMMENT '用户名',
+	`password` VARCHAR(64) NOT NULL COMMENT '密码',
+	`avatar` VARCHAR(255) NULL DEFAULT NULL COMMENT '头像',
+	`intro` VARCHAR(255) NULL DEFAULT NULL COMMENT '个人简介',
+ 	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `t_comment` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '评论id',
+	`user_id` INT(11) NOT NULL COMMENT '评论用户id',
+	`song_id` INT(11) NOT NULL COMMENT '评论歌曲id',
+	`content` VARCHAR(255) NULL DEFAULT NULL COMMENT '评论内容',
+	`create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+	PRIMARY KEY (`id`) USING BTREE,
+	FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+	FOREIGN KEY (`song_id`) REFERENCES `t_song` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+CREATE TABLE `t_rank` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '排行榜id',
+	`rank_name` VARCHAR(64) NOT NULL COMMENT '榜单名称',
+	`song_id` INT(64) NOT NULL COMMENT '歌曲id',
+	`intro` VARCHAR(255) NULL DEFAULT NULL COMMENT '榜单简介',
+	`create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+	`update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (`song_id`) REFERENCES `t_song` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+
+
+
+
+
+
+
+
+

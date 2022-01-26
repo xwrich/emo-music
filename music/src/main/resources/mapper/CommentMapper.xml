@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rich.music.mapper.CommentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.rich.music.pojo.Comment">
+        <id column="id" property="id" />
+        <result column="user_id" property="user_id" />
+        <result column="song_id" property="song_id" />
+        <result column="content" property="content" />
+        <result column="create_time" property="create_time" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, song_id, content, create_time
+    </sql>
+
+</mapper>
