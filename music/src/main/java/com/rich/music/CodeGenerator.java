@@ -60,7 +60,7 @@ public class CodeGenerator {
         //xml 开启BaseColumnList
         gc.setBaseColumnList(true);
         // 实体属性 Swagger2 注解
-//		gc.setSwagger2(true);
+		gc.setSwagger2(true);
         mpg.setGlobalConfig(gc);
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
@@ -122,7 +122,7 @@ public class CodeGenerator {
         strategy.setRestControllerStyle(true);
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
         strategy.setControllerMappingHyphenStyle(true);
-        //表前缀
+        //数据表前缀
         strategy.setTablePrefix("t_");
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
