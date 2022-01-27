@@ -3,6 +3,8 @@ package com.rich.music.mapper;
 import com.rich.music.pojo.Menu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -13,4 +15,16 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface MenuMapper extends BaseMapper<Menu> {
 
+    /**
+     * 通过用户id查询菜单列表
+     * @param id
+     * @return
+     */
+    List<Menu> getMenusByAdminId(Integer id);
+
+    /**
+     * 根据角色获取菜单列表
+     * @return
+     */
+    List<Menu> getMenusWithRole();
 }

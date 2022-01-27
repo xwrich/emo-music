@@ -54,7 +54,6 @@
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-jdbc:2.4.2" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:3.4.5" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:5.3.3" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.3.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-freemarker:2.4.2" level="project" />
     <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.30" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.3.3" level="project" />
@@ -100,6 +99,22 @@
     <orderEntry type="library" name="Maven: com.github.xiaoymin:swagger-bootstrap-ui:1.9.6" level="project" />
     <orderEntry type="library" name="Maven: org.javassist:javassist:3.25.0-GA" level="project" />
     <orderEntry type="library" name="Maven: com.github.whvcse:easy-captcha:1.6.2" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-redis:2.4.2" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-redis:2.4.3" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-keyvalue:2.4.3" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:2.4.3" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.3.3" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-oxm:5.3.3" level="project" />
+    <orderEntry type="library" name="Maven: io.lettuce:lettuce-core:6.0.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.58.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-handler:4.1.58.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-resolver:4.1.58.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-buffer:4.1.58.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.58.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.58.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.projectreactor:reactor-core:3.4.2" level="project" />
+    <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.3" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.9.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-starter-test:2.4.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test:2.4.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test-autoconfigure:2.4.2" level="project" />

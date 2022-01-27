@@ -17,4 +17,9 @@ public class HelloController {
     public String hello(){
         return "Hello,SpringBoot";
     }
+
+    @GetMapping("/comment/basic/test")
+    public String comment() {
+        return "comment/basic/test";
+    }
 }

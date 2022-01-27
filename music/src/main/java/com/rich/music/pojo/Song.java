@@ -34,29 +34,34 @@ public class Song implements Serializable {
     private Integer id;
 
     /**
+     * 作者
+     */
+    private String author;
+
+    /**
      * 歌曲名
      */
-    private String song_name;
+    private String songName;
 
     /**
      * 歌曲分类
      */
-    private Integer category_id;
+    private Integer categoryId;
 
     /**
      * 歌词
      */
-    private String song_words;
+    private String songWords;
 
     /**
      * 歌曲mp3/avi的url
      */
-    private String audio_url;
+    private String audioUrl;
 
     /**
      * 歌曲MV的url
      */
-    private String video_url;
+    private String videoUrl;
 
     /**
      * 海报

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -37,17 +38,22 @@ public class Category implements Serializable {
     /**
      * 分类名
      */
-    private String category_name;
+    @ApiModelProperty(value = "categoryName")
+    private String categoryName;
 
     /**
      * 创建时间
      */
-    private LocalDateTime create_time;
+    @ApiModelProperty(value = "createTime")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
+    private LocalDateTime createTime;
 
     /**
      * 更新时间
      */
-    private LocalDateTime update_time;
+    @ApiModelProperty(value = "updateTime")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
+    private LocalDateTime updateTime;
 
 
 }

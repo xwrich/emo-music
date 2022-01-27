@@ -1,9 +1,12 @@
 package com.rich.music.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.List;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -32,6 +35,9 @@ public class Menu implements Serializable {
     @ApiModelProperty(value = "菜单名称")
     private String name;
 
+    @ApiModelProperty(value = "菜单url")
+    private String url;
+
     @ApiModelProperty(value = "菜单路径")
     private String path;
 
@@ -46,6 +52,17 @@ public class Menu implements Serializable {
 
     @ApiModelProperty(value = "是否启用")
     private Boolean enabled;
+
+    /**
+     * 表示在数据库的表字段中，没有children，不用再去查找
+     */
+    @ApiModelProperty(value = "子菜单")
+    @TableField(exist = false)
+    private List<Menu> children;
+
+    @ApiModelProperty(value = "角色列表")
+    @TableField(exist = false)
+    private List<Role> roles;
 
 
 }
