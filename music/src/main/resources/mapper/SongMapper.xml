@@ -5,18 +5,21 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.rich.music.pojo.Song">
         <id column="id" property="id" />
-        <result column="song_name" property="song_name" />
-        <result column="category_id" property="category_id" />
-        <result column="song_words" property="song_words" />
-        <result column="audio_url" property="audio_url" />
-        <result column="video_url" property="video_url" />
+        <result column="singer_id" property="singerId" />
+        <result column="category_id" property="categoryId" />
+        <result column="song_name" property="songName" />
+        <result column="song_words" property="songWords" />
+        <result column="audio_url" property="audioUrl" />
+        <result column="video_url" property="videoUrl" />
         <result column="post" property="post" />
         <result column="intro" property="intro" />
     </resultMap>
+
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, song_name, category_id, song_words, audio_url, video_url, post, intro
     </sql>
+
 
 </mapper>

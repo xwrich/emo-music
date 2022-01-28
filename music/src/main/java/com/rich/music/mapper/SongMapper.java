@@ -3,6 +3,8 @@ package com.rich.music.mapper;
 import com.rich.music.pojo.Song;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口

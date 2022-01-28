@@ -5,16 +5,91 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.rich.music.pojo.Rank">
         <id column="id" property="id" />
-        <result column="rank_name" property="rank_name" />
-        <result column="song_id" property="song_id" />
+        <result column="rank_name" property="rankName" />
+        <result column="song_id" property="songId" />
         <result column="intro" property="intro" />
-        <result column="create_time" property="create_time" />
-        <result column="update_time" property="update_time" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+    
+    <resultMap id="RankWithChildren" type="com.rich.music.pojo.Rank" extends="BaseResultMap">
+        <id column="id" property="id" />
+        <result column="rank_name" property="rankName" />
+        <collection property="children" ofType="com.rich.music.pojo.Song" >
+            <id column="song_id" property="id" />
+            <result column="singer_id" property="singerId" />
+            <result column="name" property="singerName" />
+            <result column="category_id" property="categoryId" />
+            <result column="category_name" property="categoryName" />
+            <result column="song_name" property="songName" />
+            <result column="song_words" property="songWords" />
+            <result column="audio_url" property="audioUrl" />
+            <result column="video_url" property="audioUrl" />
+            <result column="post" property="post" />
+            <result column="intro" property="intro" />
+        </collection>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, rank_name, song_id, intro, create_time, update_time
     </sql>
+
+    <!--获取所有榜单（分页）-->
+    <select id="getAllRankByPage" resultMap="RankWithChildren">
+        SELECT
+            r.id,
+            r.rank_name,
+            r.song_id,
+            s.singer_id,
+            sr.`name`,
+            s.song_name,
+            s.category_id,
+            c.category_name,
+            s.song_words,
+            s.audio_url,
+            s.video_url,
+            s.post,
+            r.intro
+        FROM
+            t_rank r,
+            t_song s,
+            t_singer sr,
+            t_category c
+        WHERE
+            r.song_id = s.id
+          AND s.singer_id = sr.id
+          AND s.category_id = c.id
+        ORDER BY
+            r.id
+    </select>
+
+    <!--property:关联的属性的名字,ofType:关联属性的泛型-->
+    <!--association是一对一，一对多的关联-->
+    <!--collection是一对一，多对一的关联-->
+    <resultMap id="rankWithSongs" type="com.rich.music.dto.RankWithSongDTO">
+        <id column="id" property="id" />
+        <result column="rank_name" property="rankName" />
+        <collection property="songDTOList" ofType="com.rich.music.dto.SongWithRankDTO">
+            <id column="sid" property="songId" />
+            <result column="song_name" property="songName" />
+        </collection>
+    </resultMap>
+
+    <!--根据榜单的song_id获取所有的歌曲名称-->
+    <select id="getAllRankWithSongs" resultMap="rankWithSongs">
+        SELECT
+            r.id,
+            r.rank_name,
+            s.id AS sid,
+            s.song_name
+        FROM
+            t_rank r
+                LEFT JOIN t_song s ON r.song_id = s.id
+    </select>
+
+    <insert id="addRank">
+
+    </insert>
 
 </mapper>

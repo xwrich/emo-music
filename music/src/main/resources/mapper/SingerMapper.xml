@@ -17,5 +17,9 @@
     <sql id="Base_Column_List">
         id, name, sex, post, birth, location, intro
     </sql>
+    <!--添加歌手-->
+    <insert id="addSinger">
+
+    </insert>
 
 </mapper>

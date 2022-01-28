@@ -1,5 +1,6 @@
 package com.rich.music.mapper;
 
+import com.rich.music.pojo.ResBean;
 import com.rich.music.pojo.Singer;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -13,4 +14,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface SingerMapper extends BaseMapper<Singer> {
 
+    /**
+     * 添加歌手
+     * @param singer
+     * @return
+     */
+    ResBean addSinger(Singer singer);
 }

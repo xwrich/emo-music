@@ -79,18 +79,13 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-<!--        &lt;!&ndash;Swagger2配置&ndash;&gt;-->
+
 <!--        <dependency>-->
 <!--            <groupId>com.github.xiaoymin</groupId>-->
 <!--            <artifactId>knife4j-spring-boot-starter</artifactId>-->
-<!--            <version>3.0.3</version>-->
+<!--            <version>3.0.2</version>-->
 <!--        </dependency>-->
-<!--        &lt;!&ndash;Swagger-UI&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.github.xiaoymin</groupId>-->
-<!--            <artifactId>knife4j-spring-ui</artifactId>-->
-<!--            <version>3.0.3</version>-->
-<!--        </dependency>-->
+
 
         <!-- swagger2 依赖 -->
         <dependency>
