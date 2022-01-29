@@ -23,9 +23,9 @@ CREATE TABLE `t_admin_role`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `adminId` int(11) NULL DEFAULT NULL COMMENT '用户id',
   `rid` int(11) NULL DEFAULT NULL COMMENT '权限id',
-  PRIMARY KEY (`id`),
-  INDEX `rid`(`rid`),
-  INDEX `adminId`(`adminId`),
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `rid`(`rid`) USING BTREE,
+  INDEX `adminId`(`adminId`) USING BTREE,
   FOREIGN KEY (`adminId`) REFERENCES `t_admin` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   FOREIGN KEY (`rid`) REFERENCES `t_role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
@@ -42,24 +42,29 @@ CREATE TABLE `t_singer` (
 );
 
 
-CREATE TABLE `t_category` (
-	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '分类id',
-	`category_name` VARCHAR(64) NOT NULL COMMENT '分类名',
-	`create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-	`update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-	PRIMARY KEY (`id`)
-);
+CREATE TABLE `t_category`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '分类id',
+  `category_name` varchar(64) NULL DEFAULT NULL COMMENT '分类名',
+  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `category_name`(`category_name`) USING BTREE
+)
 
 CREATE TABLE `t_song` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '歌曲id',
+	`singer_id` INT(11) NOT NULL COMMENT '作者id',
+	`category_id` INT(11) NULL DEFAULT NULL COMMENT '歌曲分类',
 	`song_name` VARCHAR(64) NOT NULL COMMENT '歌曲名',
-	`category_id` int(45) NULL DEFAULT NULL COMMENT '歌曲分类',
 	`song_words` VARCHAR(255) NULL DEFAULT NULL COMMENT '歌词',
 	`audio_url` VARCHAR(255) NULL DEFAULT NULL COMMENT '歌曲mp3/avi的url',
 	`video_url` VARCHAR(255) NULL DEFAULT NULL COMMENT '歌曲MV的url',
 	`post` VARCHAR(255) NULL DEFAULT NULL COMMENT '海报',
 	`intro` VARCHAR(255) NULL DEFAULT NULL COMMENT '简介',
-	PRIMARY KEY (`id`),
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `singer_id`(`singer_id`) USING BTREE,
+	INDEX `category_id`(`category_id`) USING BTREE,
+	FOREIGN KEY (`singer_id`) REFERENCES `t_singer` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
 	FOREIGN KEY (`category_id`) REFERENCES `t_category` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
@@ -68,6 +73,7 @@ CREATE TABLE `t_album` (
 	`album_name` VARCHAR(64) NOT NULL COMMENT '专辑名',
 	`song_id` INT(11) NULL DEFAULT NULL COMMENT '歌曲id',
 	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `song_id`(`song_id`) USING BTREE,
 	FOREIGN KEY(`song_id`) REFERENCES `t_song` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
@@ -96,11 +102,64 @@ CREATE TABLE `t_rank` (
 	`rank_name` VARCHAR(64) NOT NULL COMMENT '榜单名称',
 	`song_id` INT(64) NOT NULL COMMENT '歌曲id',
 	`intro` VARCHAR(255) NULL DEFAULT NULL COMMENT '榜单简介',
-	`create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+	`create_time` TIMESTAMP NULL DEFAULT NULL COMMENT '创建时间',
 	`update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`song_id`) REFERENCES `t_song` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
+
+
+
+
+CREATE TABLE `t_menu` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '菜单id',
+	`name` VARCHAR(64) NULL DEFAULT NULL COMMENT '菜单名称',
+	`url` varchar(255) NULL DEFAULT NULL COMMENT 'url',
+	`path` VARCHAR(64) NULL DEFAULT NULL COMMENT '菜单路径',
+	`component` VARCHAR(64) NULL DEFAULT NULL COMMENT '组件',
+	`icon` VARCHAR(64) NULL DEFAULT NULL COMMENT '图标',
+	`parentId` INT(11) NULL DEFAULT NULL COMMENT '父菜单id',
+	`enabled` TINYINT(1) NULL DEFAULT 1 COMMENT '是否启用',
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `parentId`(`parentId`) USING BTREE,
+	FOREIGN KEY (`parentId`) REFERENCES `t_menu` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+
+CREATE TABLE `t_menu_role` (
+	`id` int(11) NOT NULL AUTO_INCREMENT COMMENT '菜单权限id',
+  `mid` int(11) NULL DEFAULT NULL COMMENT '菜单id',
+  `rid` int(11) NULL DEFAULT NULL COMMENT '权限id',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `mid`(`mid`) USING BTREE,
+  INDEX `rid`(`rid`) USING BTREE,
+	FOREIGN KEY (`mid`) REFERENCES `t_menu` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+	FOREIGN KEY (`rid`) REFERENCES `t_role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
